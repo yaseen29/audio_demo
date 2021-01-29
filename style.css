@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #dbdbdb;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 70vh;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: auto min-content;
+  justify-content: end;
+  justify-items: end;
+  align-items: center;
+  gap: 5px 10px;
+  font-size: larger;
+}
+
+input {
+  margin: 0;
+}
+/* #canvas{
+  height: 70vh;
+  background: #dbdbdb;
+} */
+
+#mydiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #d3d3d3;
+    cursor: move;
+  }
+  
+  #mydivheaders {
+    padding: 10px;
+    background-color: #2196F3;
+    color: #fff;
+  }
+
+  .sound_area{
+    background: #552583;
+    padding-top: 1.2rem;
+    margin-top: 53.3vh;
+  }
+
+  .buttons{
+    display: flex; 
+    justify-content: space-between;
+    padding: 0 1.5rem;
+  }
+
+  button{
+    font-size: medium;
+  }
+
+  .songs{
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .sound{
+    /* background: #dbdb45; */
+    background: #FDB927;
+    height: 21vh;
+    width: 10vw;
+    text-align: center;
+  }
+
+  .sound p{
+    font-size: larger;
+    font-weight: bold;
+    align-self: center;
+    padding-top: 3rem;
+  }
+
+  .sound span{
+    color:#343a40;
+    font-weight: 900;
+    font-size: 1.5rem;
+  }
+  

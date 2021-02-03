@@ -9,7 +9,7 @@ const MJ = document.getElementById('MJ')
 const button1 = document.getElementById('button1')
 const button2 = document.getElementById('button2')
 const myDiv = document.getElementById('mydiv')
-let listener;
+var listener;
 
 const audioContext1 = new AudioContext();
 const audioContext2 = new AudioContext();
@@ -21,10 +21,8 @@ listener = audioContext1.listener;
 // const posZ = 300;
 
 // positioning the listener
-let rect = myDiv.getBoundingClientRect();
-listener.positionX.value = rect.left;
-listener.positionY.value = rect.top
-dragElement(listener);
+
+// dragElement(listener);
 // listener.positionZ.value = posZ-5;
 
 // listener audio orientation
@@ -222,3 +220,16 @@ function resize() {
   visualizer.width = visualizer.clientWidth * window.devicePixelRatio
   visualizer.height = visualizer.clientHeight * window.devicePixelRatio
 }
+
+function updateListenerPosition(e) { 
+  if (window.isDragging) {
+    console.log("updateListenerPosition")
+    
+    let rect = myDiv.getBoundingClientRect();
+    listener.positionX.value = rect.left;
+    listener.positionY.value = rect.top;
+  }
+
+}
+
+document.addEventListener("mousemove", updateListenerPosition);

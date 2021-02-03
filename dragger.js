@@ -1,6 +1,8 @@
 //Make the DIV element draggagle:
 dragElement(document.getElementById("mydiv"));
 
+window.isDragging = false
+
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "header")) {
@@ -20,6 +22,7 @@ function dragElement(elmnt) {
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
+    window.isDragging = true;
   }
 
   function elementDrag(e) {
@@ -33,7 +36,7 @@ function dragElement(elmnt) {
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    changeVolume(elmnt)
+    // changeVolume(elmnt)
   }
 
   function changeVolume(el) {
@@ -66,6 +69,7 @@ function dragElement(elmnt) {
     /* stop moving when mouse button is released:*/
     document.onmouseup = null;
     document.onmousemove = null;
+    window.isDragging = false
   }
   
 }

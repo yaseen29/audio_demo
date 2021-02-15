@@ -9,22 +9,22 @@ const MJ = document.getElementById('MJ')
 const button1 = document.getElementById('button1')
 const button2 = document.getElementById('button2')
 const myDiv = document.getElementById('mydiv')
-let listener;
+var listener1;
+var listener2;
 
 const audioContext1 = new AudioContext();
 const audioContext2 = new AudioContext();
 
 // setting up the listener
-listener = audioContext1.listener;
+listener1 = audioContext1.listener;
+listener2 = audioContext2.listener ;
 // const posX = window.innerWidth/innerWidth;
 // const posY = window.innerHeight/innerHeight;
 // const posZ = 300;
 
 // positioning the listener
-let rect = myDiv.getBoundingClientRect();
-listener.positionX.value = rect.left;
-listener.positionY.value = rect.top
-dragElement(listener);
+
+// dragElement(listener);
 // listener.positionZ.value = posZ-5;
 
 // listener audio orientation
@@ -36,21 +36,24 @@ dragElement(listener);
 // listener.upZ.value = 0;
 
 // audio context orientation
-let rectMJ = MJ.getBoundingClientRect();
-const posX = rectMJ.left;
-const posY = rectMJ.top;
+var rectMJ = MJ.getBoundingClientRect();
+const posX1 = rectMJ.left;
+const posY1 = rectMJ.top;
+
+var rectTS = travis.getBoundingClientRect();
+const posX2 = rectMJ.left;
+const posY2 = rectMJ.top;
 
 const pannerModel = 'HRTF';
-const innerCone = 60;
+const innerCone = 30;
 const outerCone = 30;
-const outerGain = 0.3;
-
+const outerGain = 0.1;
 const distanceModel = 'linear';
 const maxDistance = 10000;
 const refDistance = 1;
 const rollOff = 10;
 
-const pannerTing = new PannerNode(audioContext1, {
+const pannerTing1 = new PannerNode(audioContext1, {
   panningModel: pannerModel,
   distanceModel: distanceModel,
   refDistance: refDistance,
@@ -61,10 +64,29 @@ const pannerTing = new PannerNode(audioContext1, {
   coneOuterGain: outerGain
 })
 
+
+const pannerTing2 = new PannerNode(audioContext2, {
+  panningModel: pannerModel,
+  distanceModel: distanceModel,
+  refDistance: refDistance,
+  maxDistance: maxDistance,
+  rolloffFactor: rollOff,
+  coneInnerAngle: innerCone,
+  coneOuterAngle: outerCone,
+  coneOuterGain: outerGain
+})
+
+var position1 = [pannerTing1.positionX, pannerTing1.positionY];
+var position2 = [pannerTing2.positionX, pannerTing2.positionY];
+
+
+const myMap = new Map([[pannerTing1, position1], [pannerTing2, position2]]);
+console.log(myMap)
+
 const track1 = audioContext1.createMediaElementSource(MJ);
 const track2 = audioContext2.createMediaElementSource(travis);
-track1.connect(pannerTing).connect(audioContext1.destination);
-track2.connect(audioContext2.destination);
+track1.connect(pannerTing1).connect(audioContext1.destination);
+track2.connect(pannerTing2).connect(audioContext2.destination);
 const context = audioContext1 //new AudioContext()
 const analyserNode = new AnalyserNode(context, { fftSize: 256 })
 const gainNode = new GainNode(context, { gain: volume.value})
@@ -222,3 +244,20 @@ function resize() {
   visualizer.width = visualizer.clientWidth * window.devicePixelRatio
   visualizer.height = visualizer.clientHeight * window.devicePixelRatio
 }
+
+function updateListenerPosition(e) { 
+  if (window.isDragging) {
+    console.log("updateListenerPosition")
+    
+    let rect = myDiv.getBoundingClientRect();
+    listener1.positionX.value = rect.left;
+    listener1.positionY.value = rect.top;
+    // listener1.positionZ.value = 295;
+    listener2.positionX.value = rect.left;
+    listener2.positionY.value = rect.top;
+    // listener1.positionZ.value = 295;
+  }
+
+}
+
+document.addEventListener("mousemove", updateListenerPosition);

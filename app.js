@@ -9,12 +9,8 @@ const MJ = document.getElementById('MJ')
 const button1 = document.getElementById('button1')
 const button2 = document.getElementById('button2')
 const myDiv = document.getElementById('mydiv')
-<<<<<<< HEAD
 var listener1;
 var listener2;
-=======
-var listener;
->>>>>>> e443e132851b28aa435d5d44ecc566ed391ff99c
 
 const audioContext1 = new AudioContext();
 const audioContext2 = new AudioContext();
@@ -254,17 +250,12 @@ function updateListenerPosition(e) {
     console.log("updateListenerPosition")
     
     let rect = myDiv.getBoundingClientRect();
-<<<<<<< HEAD
     listener1.positionX.value = rect.left;
     listener1.positionY.value = rect.top;
     // listener1.positionZ.value = 295;
     listener2.positionX.value = rect.left;
     listener2.positionY.value = rect.top;
     // listener1.positionZ.value = 295;
-=======
-    listener.positionX.value = rect.left;
-    listener.positionY.value = rect.top;
->>>>>>> e443e132851b28aa435d5d44ecc566ed391ff99c
   }
 
 }

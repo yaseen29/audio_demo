@@ -28,24 +28,31 @@ canvas {
   font-size: larger;
 }
 
-input {
+/* input {
   margin: 0;
-}
+} */
 /* #canvas{
   height: 70vh;
   background: #dbdbdb;
 } */
+.grid{
+  visibility: hidden;
+}
 
 #mydiv {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
     z-index: 1;
+    height: 100px;
+    width: 130px;
     background-color: #000;
     text-align: center;
     color: #fff;
     border: 1px solid #d3d3d3;
-    cursor: move;
+    /* cursor: move; */
   }
   
   #mydivheaders {
@@ -54,11 +61,11 @@ input {
     color: #fff;
   }
 
-  .sound_area{
+  /* .sound_area{
     background: #552583;
     padding-top: 1.2rem;
     margin-top: 53.3vh;
-  }
+  } */
 
   .buttons{
     display: flex; 
@@ -79,16 +86,31 @@ input {
   .sound{
     /* background: #dbdb45; */
     background: #FDB927;
-    height: 21vh;
+    height: 13vh;
     width: 10vw;
     text-align: center;
+    cursor: move;
+    border: solid 1px #000;
+    border-radius: 5px;
+  }
+
+  #sound1{
+    position: absolute;
+    top: 77%;
+    left: 0;
+  }
+
+  #sound2{
+    position: absolute;
+    top: 77%;
+    left: 90%;
   }
 
   .sound p{
     font-size: larger;
     font-weight: bold;
     align-self: center;
-    padding-top: 3rem;
+    padding-top: 0.3rem;
   }
 
   .sound span{

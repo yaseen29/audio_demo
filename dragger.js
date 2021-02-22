@@ -1,5 +1,7 @@
 //Make the DIV element draggagle:
-dragElement(document.getElementById("mydiv"));
+// dragElement(document.getElementById("mydiv"));
+dragElement(document.getElementById("sound1"));
+dragElement(document.getElementById("sound2"));
 
 window.isDragging = false
 

@@ -272,18 +272,26 @@ function resize() {
 function updateListenerPosition(e) { 
   if (window.isDragging) {
     console.log("updateListenerPosition")
-    console.log("listener 1: " + listener1.positionX.value)
-    console.log("listener 1: " + listener1.positionY.value)
-    console.log("listener 2: " + listener2.positionX.value)
-    console.log("listener 2: " + listener2.positionY.value)
+    console.log(`%c listener 1 X: %c ${listener1.positionX.value}`,
+    "font-weight: bold",
+    "color: green" )
+    console.log(`%c listener 1 Y: %c ${listener1.positionY.value}`,
+    "font-weight: bold",
+    "color: red" )
+    console.log(`%c listener 2 X: %c ${listener2.positionX.value}`,
+    "font-weight: bold",
+    "color: green" )
+    console.log(`%c listener 2 Y: %c ${listener2.positionY.value}`,
+    "font-weight: bold",
+    "color: red" )
     
     let rect = myDiv.getBoundingClientRect();
     listener1.positionX.value = rect.left;
     listener1.positionY.value = rect.top;
-    // listener1.positionZ.value = 295;
+    listener1.positionZ.value = 295;
     listener2.positionX.value = rect.left;
     listener2.positionY.value = rect.top;
-    // listener1.positionZ.value = 295;
+    listener1.positionZ.value = 295;
   }
 
 }

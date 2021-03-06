@@ -4,7 +4,7 @@ const bass = document.getElementById('bass')
 const mid = document.getElementById('mid')
 const treble = document.getElementById('treble')
 const visualizer = document.getElementById('visualizer')
-const travis = document.getElementById('travis')
+const RS = document.getElementById('RS')
 const MJ = document.getElementById('MJ')
 const button1 = document.getElementById('button1')
 const button2 = document.getElementById('button2')
@@ -28,7 +28,7 @@ const posZ = 300;
 
 listener1.positionX.value = posX;
 listener1.positionY.value = posY;
-listener1.positionZ.value = posZ-5;
+// listener1.positionZ.value = posZ-5;
 
 listener2.positionX.value = posX;
 listener2.positionY.value = posY;
@@ -50,14 +50,10 @@ listener2.upY.value = 1;
 listener2.upZ.value = 0;
 
 
-// var rectTS = travis.getBoundingClientRect();
-// const posX2 = rectMJ.left;
-// const posY2 = rectMJ.top;
-
 const pannerModel = 'HRTF';
 const innerCone = 360;
-const outerCone = 360;
-const outerGain = 0.1;
+const outerCone = 0;
+const outerGain = 0;
 const distanceModel = 'linear';
 const maxDistance = 10000;
 const refDistance = 1;
@@ -89,14 +85,14 @@ const pannerTing2 = new PannerNode(audioContext2, {
 
 // audio context position and orientation
 var rectMJ = sounds1.getBoundingClientRect();
-pannerTing1.positionX.value = rectMJ.left;
+pannerTing1.positionX = rectMJ.left;
 pannerTing1.positionY.value = rectMJ.top;
 pannerTing1.positionZ.value = 300;
 
-var rectTS = sounds2.getBoundingClientRect();
-pannerTing2.positionX.value = rectTS.left;
-pannerTing2.positionY.value = rectTS.top;
-pannerTing2.positionZ.value = -30;
+var rectRS = sounds2.getBoundingClientRect();
+pannerTing2.positionX.value = rectRS.left;
+pannerTing2.positionY.value = rectRS.top;
+pannerTing2.positionZ.value = 300;
 
 
 
@@ -108,7 +104,7 @@ const myMap = new Map([[pannerTing1, position1], [pannerTing2, position2]]);
 console.log(myMap)
 
 const track1 = audioContext1.createMediaElementSource(MJ);
-const track2 = audioContext2.createMediaElementSource(travis);
+const track2 = audioContext2.createMediaElementSource(RS);
 track1.connect(pannerTing1).connect(audioContext1.destination);
 track2.connect(pannerTing2).connect(audioContext2.destination);
 const context = audioContext1 //new AudioContext()
@@ -197,10 +193,10 @@ button2.addEventListener('click', function() {
 
   // play or pause track depending on state
   if (this.dataset.playing === 'false') {
-      travis.play();
+      RS.play();
       this.dataset.playing = 'true';
   } else if (this.dataset.playing === 'true') {
-      travis.pause();
+      RS.pause();
       this.dataset.playing = 'false';
   }
 
@@ -211,7 +207,7 @@ MJ.addEventListener('ended', () => {
   button1.dataset.playing = 'false';
 }, false);
 
-travis.addEventListener('ended', () => {
+RS.addEventListener('ended', () => {
   button2.dataset.playing = 'false';
 }, false);
 
@@ -277,13 +273,13 @@ function updateListenerPosition(e) {
     "color: green" )
     console.log(`%c listener 1 Y: %c ${listener1.positionY.value}`,
     "font-weight: bold",
-    "color: red" )
+    "color: blue" )
     console.log(`%c listener 2 X: %c ${listener2.positionX.value}`,
     "font-weight: bold",
     "color: green" )
     console.log(`%c listener 2 Y: %c ${listener2.positionY.value}`,
     "font-weight: bold",
-    "color: red" )
+    "color: blue" )
     
     let rect = myDiv.getBoundingClientRect();
     listener1.positionX.value = rect.left;

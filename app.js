@@ -20,15 +20,16 @@ const audioContext2 = new AudioContext();
 // setting up the listener
 listener1 = audioContext1.listener;
 listener2 = audioContext2.listener ;
-const posX = window.innerWidth/2;
-const posY = window.innerHeight/2;
+const recty = myDiv.getBoundingClientRect();
+const posX = recty.left;
+const posY = recty.top;
 const posZ = 300;
 
 //positioning the listeners
 
 listener1.positionX.value = posX;
 listener1.positionY.value = posY;
-// listener1.positionZ.value = posZ-5;
+listener1.positionZ.value = posZ-5;
 
 listener2.positionX.value = posX;
 listener2.positionY.value = posY;
@@ -51,9 +52,9 @@ listener2.upZ.value = 0;
 
 
 const pannerModel = 'HRTF';
-const innerCone = 360;
-const outerCone = 0;
-const outerGain = 0;
+const innerCone = 30;
+const outerCone = 45;
+const outerGain = 0.4;
 const distanceModel = 'linear';
 const maxDistance = 10000;
 const refDistance = 1;
@@ -83,11 +84,19 @@ const pannerTing2 = new PannerNode(audioContext2, {
 })
 
 
-// audio context position and orientation
+// panner nodes position and orientation
 var rectMJ = sounds1.getBoundingClientRect();
 pannerTing1.positionX = rectMJ.left;
 pannerTing1.positionY.value = rectMJ.top;
 pannerTing1.positionZ.value = 300;
+
+if(pannerTing1.orientationX) {
+  pannerTing1.orientationX.setValueAtTime(1, audioContext1.currentTime);
+  pannerTing1.orientationY.setValueAtTime(0, audioContext1.currentTime);
+  pannerTing1.orientationZ.setValueAtTime(0, audioContext1.currentTime);
+} else {
+  pannerTing1.setOrientation(1,0,0);
+}
 
 var rectRS = sounds2.getBoundingClientRect();
 pannerTing2.positionX.value = rectRS.left;
@@ -96,12 +105,12 @@ pannerTing2.positionZ.value = 300;
 
 
 
-var position1 = [pannerTing1.positionX, pannerTing1.positionY];
-var position2 = [pannerTing2.positionX, pannerTing2.positionY];
+// var position1 = [pannerTing1.positionX, pannerTing1.positionY];
+// var position2 = [pannerTing2.positionX, pannerTing2.positionY];
 
 
-const myMap = new Map([[pannerTing1, position1], [pannerTing2, position2]]);
-console.log(myMap)
+// const myMap = new Map([[pannerTing1, position1], [pannerTing2, position2]]);
+// console.log(myMap)
 
 const track1 = audioContext1.createMediaElementSource(MJ);
 const track2 = audioContext2.createMediaElementSource(RS);
@@ -293,3 +302,23 @@ function updateListenerPosition(e) {
 }
 
 document.addEventListener("mousemove", updateListenerPosition);
+
+// function getPositionAtCenter(element) {
+//   const {top, left, width, height} = element.getBoundingClientRect();
+//   return {
+//     x: left + width / 2,
+//     y: top + height / 2
+//   };
+// }
+
+// function getDistanceBetweenElements(a, b) {
+//  const aPosition = getPositionAtCenter(a);
+//  const bPosition = getPositionAtCenter(b);
+
+//  return Math.hypot(aPosition.x - bPosition.x, aPosition.y - bPosition.y);  
+// }
+
+// const distance = getDistanceBetweenElements(
+//  document.getElementById("x"),
+//  document.getElementById("y")
+// );
